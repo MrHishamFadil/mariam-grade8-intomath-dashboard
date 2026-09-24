@@ -664,10 +664,10 @@ final_html = f'''<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Into Math 8 • Chapter 1 Transformational Geometry | Mariam Hisham Mohamed AbdelFadil</title>
   
-  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;0,800;1,500&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;0,800;1,500&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&display=swap" rel="stylesheet">
   
   <!-- KaTeX for crisp mathematical formulas -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -1140,6 +1140,8 @@ final_html = f'''<!DOCTYPE html>
       document.addEventListener('click', function (e) {{
         const optBtn = e.target.closest('.practice-opt-btn');
         if (!optBtn) return;
+        if (e._optHandled) return;
+        e._optHandled = true;
         const grid = optBtn.closest('.practice-options-grid');
         if (!grid) return;
         grid.querySelectorAll('.practice-opt-btn').forEach(function (b) {{
@@ -1152,6 +1154,8 @@ final_html = f'''<!DOCTYPE html>
       document.addEventListener('click', function (e) {{
         const hintBtn = e.target.closest('.btn-hint-toggle');
         if (!hintBtn) return;
+        if (e._hintHandled) return;
+        e._hintHandled = true;
         const card = hintBtn.closest('.practice-question-card');
         if (!card) return;
         const hintCard = card.querySelector('.hint-card');
@@ -1212,6 +1216,8 @@ final_html = f'''<!DOCTYPE html>
       document.addEventListener('click', function (e) {{
         const checkBtn = e.target.closest('.btn-check-mcq');
         if (!checkBtn) return;
+        if (e._checkMcqHandled) return;
+        e._checkMcqHandled = true;
         const card = checkBtn.closest('.practice-question-card');
         if (!card) return;
         const correctIndex = parseInt(card.getAttribute('data-correct'), 10);
@@ -1280,6 +1286,7 @@ final_html = f'''<!DOCTYPE html>
               '</div>' +
             '</div>' + explanationHtml;
             feedback.style.display = 'block';
+          }}
           if (window.QuizArena && window.QuizArena.getAudioEngine) {{
             window.QuizArena.getAudioEngine().playWrong();
           }}
